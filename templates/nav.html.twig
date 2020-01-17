@@ -1,0 +1,38 @@
+<div class="example-wrapper">
+    <ul>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <li>
+                <a href="{{ path('home') }}">Se déconnecter</a>
+            </li>
+
+            <li>
+                <a href="{{ path('home') }}">Gestion profil</a>
+            </li>
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <li>
+                    <a href="{{ path('home') }}">Gestion utilisateurs</a>
+                </li>
+            {% endif %}
+
+        {% else %}
+            <li>
+                <a href="{{ path('home') }}">S'inscrire</a>
+            </li>
+
+            <li>
+                <a href="{{ path('home') }}">Se connecter</a>
+            </li>
+        {% endif %}
+
+        {% if is_granted('ROLE_USER') %}
+            <li>
+                <a href="{{ path('home') }}">Jeux</a>
+            </li>
+
+            <li>
+                <a href="{{ path('home') }}">Editeurs</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>

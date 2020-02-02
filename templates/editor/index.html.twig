@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editeurs | Tous{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Editeurs</h1>
+    <h2>Tous les éditeurs</h2>
+
+    {% if is_granted("ROLE_ADMIN") %}
+        <a class="BoutonCRUD" href="{{ path('editorCreate') }}">Nouveau</a>
+    {% endif %}
+
+    <ul>
+        {% for editor in editor %}
+            <li>
+                <a href="{{ path('editorDetail', {'id' : editor.id}) }}"><h3>{{ editor.name }}</h3></a>
+                <h4>{{ editor.nationality }}</h4>
+
+                {% if is_granted("ROLE_ADMIN") %}
+                    <a class="BoutonCRUD" href="{{ path('editorEdit', {'id' : editor.id}) }}">Editer</a>
+                    <a class="BoutonCRUD" href="{{ path('editorDelete', {'id' : editor.id}) }}">Supprimer</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

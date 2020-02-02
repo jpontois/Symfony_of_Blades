@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jeux | Tous{% endblock %}
+
+{% block body %}
+
+    <h1>Jeux</h1>
+    <h2>Tous les jeux</h2>
+    
+    {% if is_granted("ROLE_ADMIN") %}
+        <a class="BoutonCRUD" href="{{ path('gameCreate') }}">Nouveau</a>
+    {% endif %}
+
+    <ul>
+        {% for game in game %}
+            <li>
+                <a href="{{ path('gameDetail', {'id' : game.id}) }}"><h3> {{ game.name }} </h3></a>
+                <h4>
+                    {% if game.editor is not null %} {{ game.editor.name }} - {% endif %} {{ game.plateform }}  - {{ game.releaseDate|date('d m Y') }}
+                </h4>
+
+                {% if is_granted("ROLE_ADMIN") %}
+                    <a class="BoutonCRUD" href="{{ path('gameEdit', {'id' : game.id}) }}">Editer</a>
+                    <a class="BoutonCRUD" href="{{ path('gameDelete', {'id' : game.id}) }}">Supprimer</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    
+{% endblock %}

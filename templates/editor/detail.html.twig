@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editeur | {{ editor.name }}{% endblock %}
+
+{% block body %}
+
+    <h1>Editeur</h1>
+    <h2>{{ editor.name }} - {{ editor.nationality }}</h2>
+    
+    <a class="BoutonCRUD" href="{{ path('editor') }}">Retour à la liste des éditeurs</a>
+
+    <ul>
+        {% for game in game %}
+            <li>
+                <a href="{{ path('gameDetail', {'id' : game.id}) }}"><h3>{{ game.name }}</h3></a>
+                <h4>{{ game.plateform }} - {{ game.releaseDate|date('d m Y') }}</h4>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

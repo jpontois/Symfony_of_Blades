@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jeux | {{ game.name }}{% endblock %}
+
+{% block body %}
+
+    <h1>Jeux</h1>
+    <h2>{{ game.name }}</h2>
+    
+    <a class="BoutonCRUD" href="{{ path('home') }}">Retour à la liste des jeux</a>
+
+    <ul>
+        {% if game.editor is not null %}
+            <li><a href="{{ path('editorDetail', {'id' : game.editor.id}) }}">{{ game.editor.name }}</a></li>
+        {% endif %}
+        <li>{{ game.plateform }}</li>
+        <li>{{ game.releaseDate|date('d m Y') }}</li>
+        <li>{{ game.description }}</li>
+    </ul>
+
+{% endblock %}
+

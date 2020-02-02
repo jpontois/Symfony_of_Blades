@@ -1,20 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}Profil | Administration{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Espace administrateur</h1>
+    <h2>Gestion des utilisateurs</h2>
+    
+    <a class="BoutonCRUD" href="{{ path('signin') }}">Nouveau</a>
 
-    This friendly message is coming from:
     <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/project/src/Controller/UserController.php'|file_link(0) }}">src/Controller/UserController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/project/templates/user/index.html.twig'|file_link(0) }}">templates/user/index.html.twig</a></code></li>
+        {% for user in user %}
+            <li>
+                <h3>{{ user.firstName }} {{ user.lastName}} - {{ user.roles[0] }} <h3>
+                <h4>{{user.id}}  |  {{ user.email }} - {{ user.birthDate|date('d m Y') }} - crée le {{ user.creationDate|date('d m Y') }}</h4>
+
+                <a class="BoutonCRUD" href="{{ path('userEdit', {'id' : user.id}) }}">Editer</a>
+                <a class="BoutonCRUD" href="{{ path('userDelete', {'id' : user.id}) }}">Supprimer</a>
+            </li>
+        {% endfor %}
     </ul>
-</div>
+    
 {% endblock %}

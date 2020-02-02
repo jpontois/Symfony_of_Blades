@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Validate;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GameEntityRepository")
@@ -18,16 +19,25 @@ class GameEntity
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Validate\Length(
+     *      max="255", maxMessage="Le nom du jeu ne peut excéder 255 caractères"
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Validate\Length(
+     *      max="255", maxMessage="Le nom de la plateforme du jeu ne peut excéder 255 caractères"
+     * )
      */
     private $plateform;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=5000)
+     * @Validate\Length(
+     *      max="255", maxMessage="La description du jeu ne peut excéder 5000 caractères"
+     * )
      */
     private $description;
 
@@ -37,7 +47,8 @@ class GameEntity
     private $releaseDate;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\EditorEntity", inversedBy="name")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $editor;
 
@@ -94,15 +105,21 @@ class GameEntity
         return $this;
     }
 
-    public function getEditor(): ?string
+    public function getEditor(): ?EditorEntity
     {
         return $this->editor;
     }
 
-    public function setEditor(string $editor): self
+    public function setEditor(EditorEntity $editor): self
     {
         $this->editor = $editor;
 
+        return $this;
+    }
+
+    public function setEditorToNull(): self
+    {
+        $this->editor = null;
         return $this;
     }
 }

@@ -1,27 +1,27 @@
-<div class="example-wrapper">
+<nav>
     <ul>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <li>
-                <a href="{{ path('home') }}">Se déconnecter</a>
+                <a href="{{ path('logout') }}">Se déconnecter</a>
             </li>
 
             <li>
-                <a href="{{ path('home') }}">Gestion profil</a>
+                <a href="{{ path('profil') }}">Gestion profil</a>
             </li>
 
             {% if is_granted('ROLE_ADMIN') %}
                 <li>
-                    <a href="{{ path('home') }}">Gestion utilisateurs</a>
+                    <a href="{{ path('user') }}">Gestion utilisateurs</a>
                 </li>
             {% endif %}
 
         {% else %}
             <li>
-                <a href="{{ path('home') }}">S'inscrire</a>
+                <a href="{{ path('signin') }}">S'inscrire</a>
             </li>
 
             <li>
-                <a href="{{ path('home') }}">Se connecter</a>
+                <a href="{{ path('login') }}">Se connecter</a>
             </li>
         {% endif %}
 
@@ -31,8 +31,8 @@
             </li>
 
             <li>
-                <a href="{{ path('home') }}">Editeurs</a>
+                <a href="{{ path('editor') }}">Editeurs</a>
             </li>
         {% endif %}
     </ul>
-</div>
+</nav>
